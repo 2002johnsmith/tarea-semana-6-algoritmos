@@ -39,12 +39,20 @@ public class MenuManager : MonoBehaviour
         int aux = enemy.QueueActions.Count;
         for (int i = 0; i < aux; i++)
         {
-           
-            enemy.ManagerActions(enemy.QueueActions.Dequeue());
-            ChangueMessage(enemy.Message);
-            Debug.Log("Siguiente accion");
-            yield return new WaitForSeconds(delayActions);
-            OnChangueAction?.Invoke(false);
+            var valueAction = enemy.QueueActions.Dequeue();
+           if (valueAction != default)
+            {
+                enemy.ManagerActions(valueAction);
+                ChangueMessage(enemy.Message);
+                Debug.Log("Siguiente accion");
+                yield return new WaitForSeconds(delayActions);
+                OnChangueAction?.Invoke(false);
+            }
+            else
+            {
+                break;
+            }
+              
         }
         enemy.ManagerActions(Enemy.Actions.ExitScreen);
         ChangueMessage(enemy.Message);

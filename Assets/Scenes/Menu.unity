@@ -246,6 +246,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rotationSpeed: 180
+  moveSpeed: 2
+  moveRange: 3
   bulletPrefab: {fileID: 1297903240615844242, guid: fa80587b989c32142aa5db3700329ae7, type: 3}
   speedBullet: 5
   firePoint: {fileID: 5361721}
@@ -275,7 +277,7 @@ Rigidbody:
   m_UseGravity: 0
   m_IsKinematic: 0
   m_Interpolate: 0
-  m_Constraints: 112
+  m_Constraints: 0
   m_CollisionDetection: 0
 --- !u!1 &260326243
 GameObject:
@@ -1206,37 +1208,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &1258785261
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1258785262}
-  m_Layer: 0
-  m_Name: Place
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &1258785262
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1258785261}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 1.3646154, y: 4.980957, z: -2.45}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1579915800
 GameObject:
   m_ObjectHideFlags: 0
@@ -1980,7 +1951,7 @@ MonoBehaviour:
   textMessage: {fileID: 278788254}
   enemy: {fileID: 5361722}
   numActions: 3
-  delayActions: 2
+  delayActions: 3
 --- !u!4 &2067560348
 Transform:
   m_ObjectHideFlags: 0
@@ -2087,4 +2058,3 @@ SceneRoots:
   - {fileID: 5361721}
   - {fileID: 1579915801}
   - {fileID: 2067560348}
-  - {fileID: 1258785262}

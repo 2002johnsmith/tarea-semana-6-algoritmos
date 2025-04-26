@@ -12,11 +12,10 @@ public class Enemy : MonoBehaviour
 
     [Header("Movements")]
     [SerializeField] private float rotationSpeed;
-    private float moveSpeed = 2f;
-    private float moveRange = 3f;
+    [SerializeField] private float moveSpeed;
+    [SerializeField] private float moveRange;
     Vector3 target;
     Rigidbody rb;
-    private bool movingRight = true;
     private Vector3 startPosition;
 
 
@@ -56,17 +55,17 @@ public class Enemy : MonoBehaviour
     {
         if(isActionMove)
         {
+            
             transform.position = Vector3.MoveTowards(transform.position, target, moveSpeed * Time.deltaTime);
-            if (Vector3.Distance(transform.position, target) < 0.1f)
+            if (Vector3.Distance(transform.position, target) <= 0.1)
             {
-                movingRight = !movingRight;
+                moveRange *= -1;
             }
+           
+            target = startPosition +  Vector3.right * moveRange;
         }
 
-        if (isActionRotation)
-        {
-            transform.Rotate(Vector3.up * rotationSpeed * Time.deltaTime);
-        }
+        
         
 
     }
@@ -77,8 +76,11 @@ public class Enemy : MonoBehaviour
         {
             rbBullet.linearVelocity = Vector3.right * speedBullet;
         }
-         
-        
+        if (isActionRotation)
+        {
+            rb.MoveRotation(rb.rotation * Quaternion.Euler(Vector3.up * rotationSpeed * Time.fixedDeltaTime));
+        }
+
     }
 
     public void ManagerActions(Actions actions)
@@ -143,8 +145,6 @@ public class Enemy : MonoBehaviour
     public void Movement()
     {
         SetStateMoveAction(true);
-        target = startPosition + (movingRight ? Vector3.right : Vector3.left) * moveRange;
-        
     }
 
     public void Rotate()
