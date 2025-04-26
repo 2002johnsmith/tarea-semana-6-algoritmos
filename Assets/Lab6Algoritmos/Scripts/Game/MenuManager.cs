@@ -2,7 +2,7 @@ using System.Collections;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
-
+using System;
 public class MenuManager : MonoBehaviour
 {
     [SerializeField] private Button buttonAddActions;
@@ -13,7 +13,7 @@ public class MenuManager : MonoBehaviour
     [SerializeField] private int numActions;
     [SerializeField] private int delayActions;
 
-
+    public static event Action<bool> OnChangueAction;
 
     private void Start()
     {
@@ -30,8 +30,12 @@ public class MenuManager : MonoBehaviour
 
     IEnumerator PlayActions()
     {
+        enemy.gameObject.SetActive(true);
         enemy.ManagerActions(Enemy.Actions.Aparition);
+        ChangueMessage(enemy.Message);
         yield return new WaitForSeconds(delayActions);
+        
+
         int aux = enemy.QueueActions.Count;
         for (int i = 0; i < aux; i++)
         {
@@ -40,8 +44,10 @@ public class MenuManager : MonoBehaviour
             ChangueMessage(enemy.Message);
             Debug.Log("Siguiente accion");
             yield return new WaitForSeconds(delayActions);
+            OnChangueAction?.Invoke(false);
         }
         enemy.ManagerActions(Enemy.Actions.ExitScreen);
+        ChangueMessage(enemy.Message);
     }
 
     void DeleteActions()
